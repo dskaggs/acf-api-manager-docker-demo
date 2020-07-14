@@ -1,0 +1,1 @@
+<cfoutput>#Dateformat(now(), "short")#</cfoutput>
