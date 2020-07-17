@@ -30,33 +30,33 @@ services:
     - webnet
 
   datastore:
-      container_name: datastore_service 
-      image: eaps-docker-coldfusion.bintray.io/apim/addons:latest
-      volumes:
-      - ./logs/datastore/redis.log:/opt/coldfusionAPIManagerAddons/datastore/redis.log
-      - ./logs/analytics:/opt/coldfusionAPIManagerAddons/analytics/logs
-      - "apim_datastore:/data/datastore"
-      ports:
-      - "6379:6379"
-      env_file:
-      - datastore.env
-      networks:
-      - webnet
+    container_name: datastore_service 
+    image: eaps-docker-coldfusion.bintray.io/apim/addons:latest
+    volumes:
+    - ./logs/datastore/redis.log:/opt/coldfusionAPIManagerAddons/datastore/redis.log
+    - ./logs/analytics:/opt/coldfusionAPIManagerAddons/analytics/logs
+    - "apim_datastore:/data/datastore"
+    ports:
+    - "6379:6379"
+    env_file:
+    - datastore.env
+    networks:
+    - webnet
 
   analytics:
-      container_name: analytics_service
-      image: eaps-docker-coldfusion.bintray.io/apim/addons:latest
-      volumes:
-      - ./logs/datastore/redis.log:/opt/coldfusionAPIManagerAddons/datastore/redis.log
-      - ./logs/analytics:/opt/coldfusionAPIManagerAddons/analytics/logs
-      - ./data/analytics:/data/analytics
-      ports:
-      - "9200:9200"
-      - "9300:9300"
-      env_file:
-      - analytics.env
-      networks:
-      - webnet
+    container_name: analytics_service
+    image: eaps-docker-coldfusion.bintray.io/apim/addons:latest
+    volumes:
+    - ./logs/datastore/redis.log:/opt/coldfusionAPIManagerAddons/datastore/redis.log
+    - ./logs/analytics:/opt/coldfusionAPIManagerAddons/analytics/logs
+    - ./data/analytics:/data/analytics
+    ports:
+    - "9200:9200"
+    - "9300:9300"
+    env_file:
+    - analytics.env
+    networks:
+    - webnet
 
 volumes:
   apim_datastore:
