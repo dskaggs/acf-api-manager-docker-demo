@@ -1,18 +1,23 @@
 version: "3" 
 services:
-  coldfusion: 
+  coldfusion:
+    container_name: coldfusion_service 
     image: eaps-docker-coldfusion.bintray.io/cf/coldfusion:latest
     env_file: acf.env
     ports:
     - "8500:8500"
     volumes:
     - "./app:/app"
+    - ./logs/coldfusion/cfusion:/opt/coldfusion/cfusion/logs/
+    - ./logs/coldfusion/coldfusionapimanager:/opt/coldfusionapimanager/logs/
     networks: 
       - webnet
 
   apimanager: 
-    container_name: apimanager
+    container_name: apimanager_service
     image: eaps-docker-coldfusion.bintray.io/apim/apimanager:latest
+    volumes:
+    - ./data/datastore:/data/datastore
     depends_on:
     - datastore
     - analytics
@@ -27,6 +32,9 @@ services:
   datastore:
       container_name: datastore_service 
       image: eaps-docker-coldfusion.bintray.io/apim/addons:latest
+      volumes:
+      - ./logs/datastore/redis.log:/opt/coldfusionAPIManagerAddons/datastore/redis.log
+      - ./logs/analytics:/opt/coldfusionAPIManagerAddons/analytics/logs
       ports:
       - "6379:6379"
       volumes:
@@ -40,7 +48,9 @@ services:
       container_name: analytics_service
       image: eaps-docker-coldfusion.bintray.io/apim/addons:latest
       volumes:
+      - ./logs/datastore/redis.log:/opt/coldfusionAPIManagerAddons/datastore/redis.log
       - ./logs/analytics:/opt/coldfusionAPIManagerAddons/analytics/logs
+      - ./data/analytics:/data/analytics
       ports:
       - "9200:9200"
       - "9300:9300"
