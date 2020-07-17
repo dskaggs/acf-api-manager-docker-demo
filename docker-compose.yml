@@ -35,10 +35,9 @@ services:
       volumes:
       - ./logs/datastore/redis.log:/opt/coldfusionAPIManagerAddons/datastore/redis.log
       - ./logs/analytics:/opt/coldfusionAPIManagerAddons/analytics/logs
+      - "apim_datastore:/data/datastore"
       ports:
       - "6379:6379"
-      volumes:
-      - "apim_datastore:/data/datastore"
       env_file:
       - datastore.env
       networks:
