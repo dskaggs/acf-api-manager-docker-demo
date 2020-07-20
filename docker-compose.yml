@@ -1,7 +1,7 @@
 version: "3" 
 services:
   coldfusion:
-    container_name: coldfusion_service 
+    container_name: coldfusion 
     image: eaps-docker-coldfusion.bintray.io/cf/coldfusion:latest
     env_file: coldfusion.env
     ports:
@@ -9,57 +9,48 @@ services:
     volumes:
     - "./app:/app"
     - ./logs/coldfusion/cfusion:/opt/coldfusion/cfusion/logs/
-    - ./logs/coldfusion/coldfusionapimanager:/opt/coldfusionapimanager/logs/
     networks: 
       - webnet
 
-#  apimanager: 
-#    container_name: apimanager_service
-#    image: eaps-docker-coldfusion.bintray.io/apim/apimanager:latest
-#    volumes:
-#    - ./data/datastore:/data/datastore
-#    depends_on:
-#    - datastore
-#    - analytics
-#    ports:
-#    - "9000:9000"
-#    - "9100:9100"
-#    env_file:
-#    - apimanager.env 
-#    networks: 
-#    - webnet
-#
-#  datastore:
-#    container_name: datastore_service 
-#    image: eaps-docker-coldfusion.bintray.io/apim/addons:latest
-#    env_file:
-#    - datastore.env
-#    volumes:
-#    - ./logs/datastore/redis.log:/opt/coldfusionAPIManagerAddons/datastore/redis.log
-#    - ./logs/analytics:/opt/coldfusionAPIManagerAddons/analytics/logs
-#    - "apim_datastore:/data/datastore"
-#    ports:
-#    - "6379:6379"
-#    networks:
-#    - webnet
-#
-#  analytics:
-#    container_name: analytics_service
-#    image: eaps-docker-coldfusion.bintray.io/apim/addons:latest
-#    env_file:
-#    - analytics.env
-#    volumes:
-#    - ./logs/datastore/redis.log:/opt/coldfusionAPIManagerAddons/datastore/redis.log
-#    - ./logs/analytics:/opt/coldfusionAPIManagerAddons/analytics/logs
-#    - ./data/analytics:/data/analytics
-#    ports:
-#    - "9200:9200"
-#    - "9300:9300"
-#    networks:
-#    - webnet
+  apimanager: 
+    container_name: apimanager
+    image: eaps-docker-coldfusion.bintray.io/apim/apimanager:latest
+    env_file:
+    - apimanager.env 
+    depends_on:
+    - datastore
+    - analytics
+    ports:
+    - "9000:9000"
+    - "9100:9100"
+    networks: 
+    - webnet
+
+  datastore:
+    container_name: datastore
+    image: eaps-docker-coldfusion.bintray.io/apim/addons:latest
+    env_file:
+    - datastore.env
+    volumes:
+    - ./data/datastore:/data/datastore
+    ports:
+    - "6379:6379"
+    networks:
+    - webnet
+
+  analytics:
+    container_name: analytics
+    image: eaps-docker-coldfusion.bintray.io/apim/addons:latest
+    env_file:
+    - analytics.env
+    ports:
+    - "9200:9200"
+    - "9300:9300"
+    networks:
+    - webnet
 
   mysql:
-    container_name: mysql_service
+    container_name: mysql
     image: mysql
     env_file: mysql.env
     volumes:
@@ -70,9 +61,6 @@ services:
     restart: always
     networks:
       - webnet
-
-volumes:
-  apim_datastore:
 
 networks:
   webnet:
