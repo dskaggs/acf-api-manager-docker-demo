@@ -7,8 +7,8 @@ logs/apimanager/*
 !logs/apimanager/.gitkeep
 logs/coldfusion/*
 !logs/coldfusion/.gitkeep
-logs/analytics/*
-!logs/analytics/.gitkeep
+logs/datastore/*
+!logs/datastore/.gitkeep
 
 data/analytics/*
 !data/analytics/.gitkeep
