@@ -1,18 +1,9 @@
 app/WEB-INF
 app/crossdomain.xml
 
-logs/analytics/*
-!logs/analytics/.gitkeep
-logs/apimanager/*
-!logs/apimanager/.gitkeep
-logs/coldfusion/*
-!logs/coldfusion/.gitkeep
-logs/datastore/*
-!logs/datastore/.gitkeep
+logs/**/*
+!logs/**/.gitkeep
 
-data/analytics/*
-!data/analytics/.gitkeep
-data/datastore/*
-!data/datastore/.gitkeep
-data/mysql/*
-!data/mysql/.gitkeep
+data/**/*
+!data/**/.gitkeep
+
