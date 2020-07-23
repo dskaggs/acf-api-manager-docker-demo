@@ -3,7 +3,6 @@ app/crossdomain.xml
 
 logs/**/*
 !logs/**/.gitkeep
-!logs/**/**/.gitkeep
 
 data/**/*
 !data/**/.gitkeep
