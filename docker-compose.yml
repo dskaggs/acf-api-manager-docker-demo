@@ -1,7 +1,6 @@
 version: "3" 
 services:
   coldfusion:
-    container_name: coldfusion 
     image: eaps-docker-coldfusion.bintray.io/cf/coldfusion:latest
     env_file: coldfusion.env
     ports:
@@ -13,7 +12,6 @@ services:
       - webnet
 
   apimanager: 
-    container_name: apimanager
     image: eaps-docker-coldfusion.bintray.io/apim/apimanager:latest
     volumes:
     - ${PWD}/logs/apimanager:/opt/coldfusionapimanager/logs
@@ -29,7 +27,6 @@ services:
     - webnet
 
   datastore:
-    container_name: datastore
     image: eaps-docker-coldfusion.bintray.io/apim/addons:latest
     env_file:
     - datastore.env
@@ -43,7 +40,6 @@ services:
     - webnet
 
   analytics:
-    container_name: analytics
     image: eaps-docker-coldfusion.bintray.io/apim/addons:latest
     volumes:
     - ${PWD}/logs/analytics:/opt/coldfusionAPIManagerAddons/analytics/logs/
@@ -57,7 +53,7 @@ services:
     - webnet
 
   mysql:
-    container_name: mysql
+    #container_name: mysql
     image: mysql
     env_file: mysql.env
     volumes:
